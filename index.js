@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-mongoose.connect(Database_URL, {
+mongoose.connect(`${Database_URL}`, {
     useNewUrlParser: true
 }).then(() => { console.log("connected to database"); })
     .catch((e) => console.log(e));
