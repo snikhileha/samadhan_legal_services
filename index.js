@@ -11,7 +11,7 @@ const fs = require('fs-extra');
 const sharp = require('sharp');
 const URL = process.env.URL;
 
-const port = 5000 || process.env.PORT ;
+const port = process.env.PORT || 5000
 
 
 const JWT_SECRET = 'hdghwjdgwhdguwdg2iu_dwhvd(dn5465*-/*bwjh44';
