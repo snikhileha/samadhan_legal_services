@@ -10,27 +10,32 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs-extra');
 const sharp = require('sharp');
 const URL = process.env.URL;
-const Database_URL=process.env.Database_URL
+// const Database_URL=process.env.Database_URL
 
 const port = process.env.PORT || 5000
 
 
 const JWT_SECRET = 'hdghwjdgwhdguwdg2iu_dwhvd(dn5465*-/*bwjh44';
 
-// const url = 'mongodb+srv://snehajoshi1895:UymMktsxS8qk3PlX@samadhan.hxseuho.mongodb.net/?retryWrites=true&w=majority';
+const url = 'mongodb+srv://snehajoshi1895:UymMktsxS8qk3PlX@samadhan.hxseuho.mongodb.net/?retryWrites=true&w=majority';
 
 const CorsOptions = {
     origin: `${URL}`,
     optionSuccessStatus: 200
 }
-
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // Change this to '*' for any origin
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     next();
+//   });
+  
 app.use(express.json());
 app.use(cors(CorsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-mongoose.connect(`${Database_URL}`, {
+mongoose.connect(`${url}`, {
     useNewUrlParser: true
 }).then(() => { console.log("connected to database"); })
     .catch((e) => console.log(e));
