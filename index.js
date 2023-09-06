@@ -23,11 +23,12 @@ const CorsOptions = {
     origin: `${URL}`,
     optionSuccessStatus: 200
 }
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // Change this to '*' for any origin
-//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     next();
-//   });
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://samadhan-legal-services.netlify.app');
+    // You can configure other CORS headers and methods as needed
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
+  });
   
 app.use(express.json());
 app.use(cors(CorsOptions));
