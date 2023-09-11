@@ -427,10 +427,7 @@ app.put("/editClient/:clientId", upload.single('image'), async (req, res) => {
 
         if (req.file) {
             const {path}=req.file;
-            // Process the uploaded image using sharp or other image manipulation library
-            // const processedImage = await sharp(req.file.buffer)
-            //     .resize(800, 600)
-            //     .toBuffer();
+           
             updateData.image = path; // Update the image field in the updateData object with the processed image
             const data = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData });
 
@@ -562,29 +559,29 @@ app.post('/signIn', async (req, res) => {
     return res.json({ status: "error", error: "Invalid Password" });
 })
 
-app.post('/signIn', async (req, res) => {
+// app.post('/signIn', async (req, res) => {
 
-    const { email, password, user } = req.body;
-    console.log(req.body);
-    const client = await Client.findOne({ email });
-    if (!client) {
-        return res.json({ error: "User Not Found" })
-    }
-    if (client.userType !== user) {
-        return res.json({ error: "UserType does not match" })
-    }
-    if (await bcrypt.compare(password, client.password)) {
-        const token = jwt.sign({ email: client.email }, JWT_SECRET, {
-            expiresIn: 600
-        });
-        if (res.status(201)) {
-            return res.json({ status: "ok", data: token })
-        } else {
-            return res.json({ error: "error" });
-        }
-    }
-    return res.json({ status: "error", error: "Invalid Password" });
-})
+//     const { email, password, user } = req.body;
+//     console.log(req.body);
+//     const client = await Client.findOne({ email });
+//     if (!client) {
+//         return res.json({ error: "User Not Found" })
+//     }
+//     if (client.userType !== user) {
+//         return res.json({ error: "UserType does not match" })
+//     }
+//     if (await bcrypt.compare(password, client.password)) {
+//         const token = jwt.sign({ email: client.email }, JWT_SECRET, {
+//             expiresIn: 600
+//         });
+//         if (res.status(201)) {
+//             return res.json({ status: "ok", data: token })
+//         } else {
+//             return res.json({ error: "error" });
+//         }
+//     }
+//     return res.json({ status: "error", error: "Invalid Password" });
+// })
 
 app.post('/profile', async (req, res) => {
     const { token } = req.body;
