@@ -583,7 +583,7 @@ app.post('/signIn', async (req, res) => {
 //     return res.json({ status: "error", error: "Invalid Password" });
 // })
 
-app.post('/profile', async (req, res) => {
+app.post('/clientProfile', async (req, res) => {
     const { token } = req.body;
     console.log(req.body);
     try {
@@ -611,6 +611,33 @@ app.post('/profile', async (req, res) => {
     }
 })
 
+app.post('/lawyerProfile', async (req, res) => {
+    const { token } = req.body;
+    console.log(req.body);
+    try {
+        const lawyer = jwt.verify(token, JWT_SECRET, (err, res) => {
+            if (err) {
+                return "token expired";
+            }
+            return res;
+        }
+        );
+
+        if (lawyer === "token expired") {
+            return res.send({ status: "error", data: "token expired" })
+        }
+        const lawyerEmail = lawyer.email;
+        Lawyer.findOne({ email: lawyerEmail })
+            .then((data) => {
+                res.send({ status: "ok", data: data })
+            })
+            .catch((error) => {
+                res.send({ status: "error", data: error })
+            })
+    } catch (error) {
+
+    }
+})
 
 
 
