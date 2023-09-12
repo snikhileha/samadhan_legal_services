@@ -504,6 +504,52 @@ app.delete("/lawyer/:lawyerId", async (req, res) => {
     }
 });
 
+app.get('/getAllAdmin', async (req, res) => {
+    try {
+        const allAdmin = await Admin.find();
+        res.send({ status: "ok", data: allAdmin });
+
+    } catch (error) {
+        res.send({ status: "error" });
+    }
+})
+
+app.get("/getAdmin/:adminId", async (req, res) => {
+
+    try {
+        const admin = await Admin.findById({ _id: req.params.adminId });
+
+        res.send({ status: "ok", data: admin });
+    } catch (error) {
+        res.send({ status: "error" });
+    }
+
+});
+
+app.put("/editAdmin/:adminId", async (req, res) => {
+
+    try {
+        const data = await Admin.findByIdAndUpdate({ _id: req.params.adminId }, { $set: req.body });
+
+        res.send({ status: "Ok", data: data });
+    } catch (error) {
+        res.send({ status: "error" });
+    }
+});
+
+
+app.delete("/admin/:adminId", async (req, res) => {
+    const dataid = req.params.adminId;
+    try {
+        const data = await Admin.findOneAndDelete({ _id: req.params.adminId });
+        console.log(data);
+        res.send({ status: "Ok", data: `Data ${dataid} Deleted` });
+    } catch (error) {
+        res.send({ status: "error" });
+    }
+});
+
+
 
 app.post('/signIn', async (req, res) => {
 
