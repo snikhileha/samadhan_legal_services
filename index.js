@@ -599,7 +599,7 @@ app.post('/signIn', async (req, res) => {
     // }
     if (client) {
         if (await bcrypt.compare(password, client.password)) {
-            const token = jwt.sign({ email: client.email },{_id:client.id}, JWT_SECRET, {
+            const token = jwt.sign({_id:client.id}, JWT_SECRET, {
                 expiresIn: 600
             });
             if (res.status(201)) {
@@ -611,7 +611,7 @@ app.post('/signIn', async (req, res) => {
     }
     else if (lawyer) {
         if (await bcrypt.compare(password, lawyer.password)) {
-            const token = jwt.sign({ email: lawyer.email },{_id:lawyer.id}, JWT_SECRET, {
+            const token = jwt.sign({_id:lawyer.id}, JWT_SECRET, {
                 expiresIn: 600
             });
             if (res.status(201)) {
