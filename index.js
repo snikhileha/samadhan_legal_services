@@ -424,7 +424,7 @@ app.put("/editClient/:clientId", upload.single('image'), async (req, res) => {
     try {
         const { clientId } = req.params;
         const updateData = req.body;
-
+        console.log(req.body);
         if (req.file) {
             const {path}=req.file;
            
@@ -637,29 +637,6 @@ app.post('/signIn', async (req, res) => {
     return res.json({ status: "error", error: "Invalid Password" });
 })
 
-// app.post('/signIn', async (req, res) => {
-
-//     const { email, password, user } = req.body;
-//     console.log(req.body);
-//     const client = await Client.findOne({ email });
-//     if (!client) {
-//         return res.json({ error: "User Not Found" })
-//     }
-//     if (client.userType !== user) {
-//         return res.json({ error: "UserType does not match" })
-//     }
-//     if (await bcrypt.compare(password, client.password)) {
-//         const token = jwt.sign({ email: client.email }, JWT_SECRET, {
-//             expiresIn: 600
-//         });
-//         if (res.status(201)) {
-//             return res.json({ status: "ok", data: token })
-//         } else {
-//             return res.json({ error: "error" });
-//         }
-//     }
-//     return res.json({ status: "error", error: "Invalid Password" });
-// })
 
 app.post('/clientProfile', async (req, res) => {
     const { token } = req.body;
@@ -676,8 +653,8 @@ app.post('/clientProfile', async (req, res) => {
         if (client === "token expired") {
             return res.send({ status: "error", data: "token expired" })
         }
-        const clientEmail = client.email;
-        Client.findOne({ email: clientEmail })
+        const clientId = client._id;
+        Client.findById({ _id: clientId})
             .then((data) => {
                 res.send({ status: "ok", data: data })
             })
@@ -704,8 +681,8 @@ app.post('/lawyerProfile', async (req, res) => {
         if (lawyer === "token expired") {
             return res.send({ status: "error", data: "token expired" })
         }
-        const lawyerEmail = lawyer.email;
-        Lawyer.findOne({ email: lawyerEmail })
+        const lawyerId = lawyer._id;
+        Lawyer.findById({ _id: lawyerId })
             .then((data) => {
                 res.send({ status: "ok", data: data })
             })
