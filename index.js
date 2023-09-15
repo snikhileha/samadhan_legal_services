@@ -655,7 +655,7 @@ app.post('/clientProfile', async (req, res) => {
         }
         
         const clientEmail = client.email;
-        Client.findById({_id:clientEmail})
+        Client.findById({email:clientEmail})
             .then((data) => {
                 res.send({ status: "ok", data: data })
             })
