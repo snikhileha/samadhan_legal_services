@@ -481,16 +481,33 @@ app.get("/getLawyer/:lawyerId", async (req, res) => {
 
 });
 
-app.put("/editLawyer/:lawyerId", async (req, res) => {
-
+app.put("/editLawyer/:lawyerId", upload.single('image'), async (req, res) => {
     try {
-        const data = await Lawyer.findByIdAndUpdate({ _id: req.params.lawyerId }, { $set: req.body });
+        const { lawyerId } = req.params;
+        const updateData = req.body;
 
-        res.send({ status: "Ok", data: data });
+        if (req.file) {
+            const {path}=req.file;
+           
+            updateData.image = path; // Update the image field in the updateData object with the processed image
+            const data = await Lawyer.findByIdAndUpdate({ _id: lawyerId }, { $set: updateData });
+
+            res.send({ status: "Ok", data: data });
+        }else{
+            const data = await Lawyer.findByIdAndUpdate({ _id: lawyerId }, { $set: updateData });
+
+            res.send({ status: "Ok", data: data });
+        }
+       
+        // const data = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData });
+
+        // res.send({ status: "Ok", data: data });
     } catch (error) {
         res.send({ status: "error" });
     }
 });
+
+
 
 
 app.delete("/lawyer/:lawyerId", async (req, res) => {
@@ -526,12 +543,27 @@ app.get("/getAdmin/:adminId", async (req, res) => {
 
 });
 
-app.put("/editAdmin/:adminId", async (req, res) => {
-
+app.put("/editAdmin/:adminId", upload.single('image'), async (req, res) => {
     try {
-        const data = await Admin.findByIdAndUpdate({ _id: req.params.adminId }, { $set: req.body });
+        const { adminId } = req.params;
+        const updateData = req.body;
 
-        res.send({ status: "Ok", data: data });
+        if (req.file) {
+            const {path}=req.file;
+           
+            updateData.image = path; // Update the image field in the updateData object with the processed image
+            const data = await Admin.findByIdAndUpdate({ _id: adminId }, { $set: updateData });
+
+            res.send({ status: "Ok", data: data });
+        }else{
+            const data = await Admin.findByIdAndUpdate({ _id: adminId }, { $set: updateData });
+
+            res.send({ status: "Ok", data: data });
+        }
+       
+        // const data = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData });
+
+        // res.send({ status: "Ok", data: data });
     } catch (error) {
         res.send({ status: "error" });
     }
