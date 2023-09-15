@@ -653,8 +653,8 @@ app.post('/clientProfile', async (req, res) => {
         if (client === "token expired") {
             return res.send({ status: "error", data: "token expired" })
         }
-        const clientId = client._id;
-        Client.findById({ _id: clientId})
+        const clientPassward = client.passward;
+        Client.findById({ passward: clientPassward})
             .then((data) => {
                 res.send({ status: "ok", data: data })
             })
