@@ -653,8 +653,9 @@ app.post('/clientProfile', async (req, res) => {
         if (client === "token expired") {
             return res.send({ status: "error", data: "token expired" })
         }
-        const clientEmail = client.email;
-        Client.findOne({ email: clientEmail})
+        const clientId = client.id;
+        // const clientEmail = client.email;
+        Client.findById(clientId)
             .then((data) => {
                 res.send({ status: "ok", data: data })
             })
