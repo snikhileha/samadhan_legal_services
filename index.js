@@ -599,7 +599,7 @@ app.post('/signIn', async (req, res) => {
     // }
     if (client) {
         if (await bcrypt.compare(password, client.password)) {
-            const token = jwt.sign({ email: client.email }, JWT_SECRET, {
+            const token = jwt.sign({ email: client.email },{_id:client.id}, JWT_SECRET, {
                 expiresIn: 600
             });
             if (res.status(201)) {
@@ -611,7 +611,7 @@ app.post('/signIn', async (req, res) => {
     }
     else if (lawyer) {
         if (await bcrypt.compare(password, lawyer.password)) {
-            const token = jwt.sign({ email: lawyer.email }, JWT_SECRET, {
+            const token = jwt.sign({ email: lawyer.email },{_id:lawyer.id}, JWT_SECRET, {
                 expiresIn: 600
             });
             if (res.status(201)) {
@@ -623,7 +623,7 @@ app.post('/signIn', async (req, res) => {
     }
     else if (admin) {
         if (await bcrypt.compare(password, admin.password)) {
-            const token = jwt.sign({ email: admin.email }, JWT_SECRET, {
+            const token = jwt.sign({ email: admin.email },{_id:admin.id} ,JWT_SECRET, {
                 expiresIn: 600
             });
             if (res.status(201)) {
@@ -655,7 +655,7 @@ app.post('/clientProfile', async (req, res) => {
         }
         const clientId = client.id;
         // const clientEmail = client.email;
-        Client.findById(clientId)
+        Client.findById({_id:clientId})
             .then((data) => {
                 res.send({ status: "ok", data: data })
             })
@@ -682,7 +682,7 @@ app.post('/lawyerProfile', async (req, res) => {
         if (lawyer === "token expired") {
             return res.send({ status: "error", data: "token expired" })
         }
-        const lawyerId = lawyer._id;
+        const lawyerId = lawyer.id;
         Lawyer.findById({ _id: lawyerId })
             .then((data) => {
                 res.send({ status: "ok", data: data })
