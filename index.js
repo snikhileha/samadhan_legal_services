@@ -623,7 +623,7 @@ app.post('/signIn', async (req, res) => {
     }
     else if (admin) {
         if (await bcrypt.compare(password, admin.password)) {
-            const token = jwt.sign({ email: admin.email },{_id:admin.id} ,JWT_SECRET, {
+            const token = jwt.sign({ email: admin.email},JWT_SECRET, {
                 expiresIn: 600
             });
             if (res.status(201)) {
