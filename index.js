@@ -306,54 +306,54 @@ app.get("/getClient/:clientId", async (req, res) => {
 //     }
 // });
 
-// app.put("/editClient/:clientId", upload.single('image'), async (req, res) => {
-//     try {
-//         const { clientId } = req.params;
-//         const updateData = req.body;
-//         console.log(req.body);
-//         if (req.file) {
-//             const {path}=req.file;
-           
-//             updateData.image = path; // Update the image field in the updateData object with the processed image
-//             const data = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData });
-
-//             res.send({ status: "Ok", data: data });
-//         }else{
-//             const data = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData });
-
-//             res.send({ status: "Ok", data: data });
-//         }
-       
-//         // const data = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData });
-
-//         // res.send({ status: "Ok", data: data });
-//     } catch (error) {
-//         res.send({ status: "error" });
-//     }
-// });
 app.put("/editClient/:clientId", upload.single('image'), async (req, res) => {
     try {
         const { clientId } = req.params;
         const updateData = req.body;
         console.log(req.body);
         if (req.file) {
-            const { path } = req.file;
-
+            const {path}=req.file;
+           
             updateData.image = path; // Update the image field in the updateData object with the processed image
+            const data = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData }, { new: true });
+            data.save();
+            res.send({ status: "Ok", data: data });
+        }else{
+            const data = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData }, { new: true });
+            data.save();
+            res.send({ status: "Ok", data: data });
         }
+       
+        // const data = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData });
 
-        const updatedClient = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData }, { new: true });
-
-        if (!updatedClient) {
-            return res.status(404).json({ status: "error", message: "Client not found" });
-        }
-
-        res.json({ status: "Ok", data: updatedClient });
+        // res.send({ status: "Ok", data: data });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ status: "error", message: "An error occurred" });
+        res.send({ status: "error" });
     }
 });
+// app.put("/editClient/:clientId", upload.single('image'), async (req, res) => {
+//     try {
+//         const { clientId } = req.params;
+//         const updateData = req.body;
+//         console.log(req.body);
+//         if (req.file) {
+//             const { path } = req.file;
+
+//             updateData.image = path; // Update the image field in the updateData object with the processed image
+//         }
+
+//         const updatedClient = await Client.findByIdAndUpdate({ _id: clientId }, { $set: updateData }, { new: true });
+
+//         if (!updatedClient) {
+//             return res.status(404).json({ status: "error", message: "Client not found" });
+//         }
+
+//         res.json({ status: "Ok", data: updatedClient });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ status: "error", message: "An error occurred" });
+//     }
+// });
 
 
 
