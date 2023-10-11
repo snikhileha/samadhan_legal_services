@@ -43,7 +43,7 @@ mongoose.connect(`${url}`, {
 
 
 
-app.use('/uploads', express.static('uploads'));
+app.use('uploads', express.static('uploads'));
 
 // const imgconfig = multer.diskStorage({
 //     destination: (req, file, callback) => {
