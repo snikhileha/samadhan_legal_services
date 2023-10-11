@@ -43,36 +43,47 @@ mongoose.connect(`${url}`, {
 
 
 
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
 
-const imgconfig = multer.diskStorage({
-    destination: (req, file, callback) => {
-        callback(null, 'uploads')
-    },
-    filename: (req, file, callback) => {
-        // callback(null, file.originalname+"-"+Date.now()+".jpg")
-        callback(null, `image-${file.originalname}-${Date.now()}`)
-    }
-})
+// const imgconfig = multer.diskStorage({
+//     destination: (req, file, callback) => {
+//         callback(null, 'uploads')
+//     },
+//     filename: (req, file, callback) => {
+//         // callback(null, file.originalname+"-"+Date.now()+".jpg")
+//         callback(null, `image-${file.originalname}-${Date.now()}`)
+//     }
+// })
 
-const isImage = (req, file, callback) => {
-    if (file.mimetype.startsWith('image')) {
-        callback(null, true)
-    }
-    else {
-        callback(new Error("only image is allowed"))
-    }
-}
+// const isImage = (req, file, callback) => {
+//     if (file.mimetype.startsWith('image')) {
+//         callback(null, true)
+//     }
+//     else {
+//         callback(new Error("only image is allowed"))
+//     }
+// }
 
 
+// const upload = multer({
+//     storage: imgconfig,
+//     fileFilter: isImage,
+//     limits: {
+//         fileSize: 5 * 1024 * 1024, // 5MB in bytes
+//     },
+// });
 const upload = multer({
-    storage: imgconfig,
-    fileFilter: isImage,
-    limits: {
-        fileSize: 5 * 1024 * 1024, // 5MB in bytes
-    },
-});
-
+    storage:multer.diskStorage({
+             destination: (req, file, callback) => {
+                callback(null, 'uploads')
+             },
+             filename: (req, file, callback) => {
+                 callback(null, file.fieldname +"-"+ Date.now() + ".jpg")
+                //  callback(null, `image-${file.originalname}-${Date.now()}`)
+             }
+         })
+        
+})
 app.get('/', (req, res) => {
     // Handle the GET request
     res.send('This is the response for the GET request');
@@ -85,7 +96,9 @@ const Client = mongoose.model('Client');
 const Lawyer = mongoose.model('Lawyer');
 const Admin = mongoose.model('Admin');
 
-app.post('/signUp-client', upload.single('image'), async (req, res) => {
+app.post('/signUp-client', upload, async (req, res) => {
+
+// app.post('/signUp-client', upload.single('image'), async (req, res) => {
 
 
 
