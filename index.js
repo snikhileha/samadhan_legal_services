@@ -78,8 +78,9 @@ const upload = multer({
                 callback(null, 'uploads')
              },
              filename: (req, file, callback) => {
-                 callback(null, file.fieldname +"-"+ Date.now() + ".jpg")
+                //  callback(null, file.fieldname +"-"+ Date.now() + ".jpg")
                 //  callback(null, `image-${file.originalname}-${Date.now()}`)
+                 callback(null, `image-${file.fieldname}-${Date.now()}.jpg`)
              }
          })
         
@@ -96,9 +97,9 @@ const Client = mongoose.model('Client');
 const Lawyer = mongoose.model('Lawyer');
 const Admin = mongoose.model('Admin');
 
-app.post('/signUp-client', upload, async (req, res) => {
 
-// app.post('/signUp-client', upload.single('image'), async (req, res) => {
+
+app.post('/signUp-client', upload.single('image'), async (req, res) => {
 
 
 
