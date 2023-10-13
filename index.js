@@ -99,7 +99,8 @@ const Admin = mongoose.model('Admin');
 
 
 
-app.post('/signUp-client', upload.single('image'), async (req, res) => {
+// app.post('/signUp-client', upload.single('image'), async (req, res) => {
+    app.post('/signUp-client', async (req, res) => {
 
 
 
