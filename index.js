@@ -127,7 +127,7 @@ app.post('/signUp-client', upload.single('image'), async (req, res) => {
 
     try {
         if (!req.file) {
-            return res.status(400).send('No file uploaded.');
+            return res.status(400).json({ error: 'no file uploaded' });
           }
 
         const oldClient = await Client.findOne({ email });
