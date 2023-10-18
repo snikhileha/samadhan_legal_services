@@ -72,19 +72,32 @@ app.use('uploads', express.static('uploads'));
 //         fileSize: 5 * 1024 * 1024, // 5MB in bytes
 //     },
 // });
-const upload = multer({
-    storage:multer.diskStorage({
-             destination: (req, file, callback) => {
-                callback(null, 'public/Images')
-             },
-             filename: (req, file, callback) => {
-                 callback(null, file.fieldname +"-"+ Date.now() + path.extname(file.originalname))
-                //  callback(null, `image-${file.originalname}-${Date.now()}`)
-                //  callback(null, `image-${file.fieldname}-${Date.now()}.jpg`)
-             }
-         })
+// const upload = multer({
+//     storage:multer.diskStorage({
+//              destination: (req, file, callback) => {
+//                 callback(null, 'public/Images')
+//              },
+//              filename: (req, file, callback) => {
+//                  callback(null, file.fieldname +"-"+ Date.now() + path.extname(file.originalname))
+//                 //  callback(null, `image-${file.originalname}-${Date.now()}`)
+//                 //  callback(null, `image-${file.fieldname}-${Date.now()}.jpg`)
+//              }
+//          })
         
-})
+// }).
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/'); // The directory where uploaded files will be stored
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '-' + file.originalname); // Rename the file
+    },
+  });
+
+  const upload = multer({ storage: storage });  
+
+  app.use('/uploads', express.static('uploads'));
+
 app.get('/', (req, res) => {
     // Handle the GET request
     res.send('This is the response for the GET request');
