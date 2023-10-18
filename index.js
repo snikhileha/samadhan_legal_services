@@ -99,8 +99,8 @@ const Admin = mongoose.model('Admin');
 
 
 
-// app.post('/signUp-client', upload.single('image'), async (req, res) => {
-    app.post('/signUp-client', async (req, res) => {
+app.post('/signUp-client', upload.single('image'), async (req, res) => {
+    // app.post('/signUp-client', async (req, res) => {
 
 
 
@@ -108,7 +108,7 @@ const Admin = mongoose.model('Admin');
     
 
     // console.log(req.body);
-    // console.log(req.file);
+    console.log(req.file);
     const encryptedPassword = await bcrypt.hash(password, 10);
 
 
