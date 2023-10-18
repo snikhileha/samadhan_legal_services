@@ -78,9 +78,9 @@ const upload = multer({
                 callback(null, 'uploads')
              },
              filename: (req, file, callback) => {
-                //  callback(null, file.fieldname +"-"+ Date.now() + ".jpg")
+                 callback(null, file.fieldname +"-"+ Date.now() + path.extname(file.originalname))
                 //  callback(null, `image-${file.originalname}-${Date.now()}`)
-                 callback(null, `image-${file.fieldname}-${Date.now()}.jpg`)
+                //  callback(null, `image-${file.fieldname}-${Date.now()}.jpg`)
              }
          })
         
