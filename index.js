@@ -75,7 +75,7 @@ app.use('uploads', express.static('uploads'));
 const upload = multer({
     storage:multer.diskStorage({
              destination: (req, file, callback) => {
-                callback(null, 'public/Images')
+                callback(null, 'Public/Images')
              },
              filename: (req, file, callback) => {
                  callback(null, file.fieldname +"-"+ Date.now() + path.extname(file.originalname))
