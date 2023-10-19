@@ -11,12 +11,6 @@ const fs = require('fs-extra');
 const sharp = require('sharp');
 const URL = process.env.URL;
 // const Database_URL=process.env.Database_URL
-const fs = require('fs');
-
-const uploadDirectory = 'uploads';
-if (!fs.existsSync(uploadDirectory)) {
-  fs.mkdirSync(uploadDirectory);
-}
 
 const port = process.env.PORT || 5000
 
