@@ -85,7 +85,7 @@ app.use('uploads', express.static('uploads'));
 //          })
         
 // }).
-const originalPath = --direname;
+const originalPath = path.join(__dirname);
 console.log(originalPath);
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
