@@ -12,6 +12,8 @@ const sharp = require('sharp');
 const URL = process.env.URL;
 // const Database_URL=process.env.Database_URL
 
+
+
 const port = process.env.PORT || 5000
 
 
@@ -85,10 +87,10 @@ app.use('uploads', express.static('uploads'));
 //          })
         
 // }).
-
+console.log( path.join(__dirname, 'uploads'));
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads'); // The directory where uploaded files will be stored
+      cb(null,  path.join(__dirname, 'uploads')); // The directory where uploaded files will be stored
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname); // Rename the file
