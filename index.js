@@ -85,6 +85,8 @@ app.use('uploads', express.static('uploads'));
 //          })
         
 // }).
+const originalPath = --direname;
+console.log(originalPath);
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'public/Images/'); // The directory where uploaded files will be stored
@@ -94,9 +96,9 @@ const storage = multer.diskStorage({
     },
   });
 
-  const upload = multer({ storage: storage });  
+const upload = multer({ storage: storage });  
 
-  app.use('/uploads', express.static('public/Images'));
+app.use('/uploads', express.static('public/Images'));
 
 app.get('/', (req, res) => {
     // Handle the GET request
