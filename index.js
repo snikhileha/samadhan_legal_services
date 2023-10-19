@@ -89,7 +89,7 @@ const originalPath = path.join(__dirname);
 console.log(originalPath);
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/Images/'); // The directory where uploaded files will be stored
+      cb(null, `${originalPath}/public/Images/`); // The directory where uploaded files will be stored
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname); // Rename the file
