@@ -11,6 +11,12 @@ const fs = require('fs-extra');
 const sharp = require('sharp');
 const URL = process.env.URL;
 // const Database_URL=process.env.Database_URL
+const fs = require('fs');
+
+const uploadDirectory = 'uploads';
+if (!fs.existsSync(uploadDirectory)) {
+  fs.mkdirSync(uploadDirectory);
+}
 
 const port = process.env.PORT || 5000
 
@@ -85,11 +91,10 @@ app.use('uploads', express.static('uploads'));
 //          })
         
 // }).
-const originalPath = path.join(__dirname);
-console.log(originalPath);
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, `${originalPath}/public/Images/`); // The directory where uploaded files will be stored
+      cb(null, 'uploads'); // The directory where uploaded files will be stored
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname); // Rename the file
@@ -98,7 +103,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });  
 
-app.use('/uploads', express.static('public/Images'));
+app.use('/uploads', express.static('uploads'));
 
 app.get('/', (req, res) => {
     // Handle the GET request
