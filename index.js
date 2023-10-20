@@ -90,7 +90,7 @@ app.use('uploads', express.static('uploads'));
 console.log( path.join(__dirname, 'uploads'));
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null,  path.join(__dirname, 'uploads')); // The directory where uploaded files will be stored
+      cb(null, 'Models'); // The directory where uploaded files will be stored
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname); // Rename the file
