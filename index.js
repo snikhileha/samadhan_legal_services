@@ -99,7 +99,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });  
 
-app.use('/uploads', express.static('uploads'));
+app.use('/Models', express.static('Models'));
 
 app.get('/', (req, res) => {
     // Handle the GET request
