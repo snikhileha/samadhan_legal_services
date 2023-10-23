@@ -100,7 +100,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });  
 
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
+app.post('/upload', upload.single('image'),(req,res)=>{
+    res.send('file uploaded');
+})
 
 app.get('/', (req, res) => {
     // Handle the GET request
