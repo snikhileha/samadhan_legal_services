@@ -45,7 +45,7 @@ mongoose.connect(`${url}`, {
 
 
 
-app.use('uploads', express.static('uploads'));
+// app.use('uploads', express.static('uploads'));
 
 // const imgconfig = multer.diskStorage({
 //     destination: (req, file, callback) => {
@@ -87,7 +87,7 @@ app.use('uploads', express.static('uploads'));
 //          })
         
 // }).
-console.log( path.join(__dirname, 'uploads'));
+// console.log( path.join(__dirname, 'uploads'));
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'uploads'); // The directory where uploaded files will be stored
