@@ -91,7 +91,7 @@ mongoose.connect(`${url}`, {
 // const originalName = __dirname;
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads'); 
+        cb(null, path.join(__dirname, 'uploads')); 
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname); // Rename the file
@@ -101,8 +101,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });  
 
 // app.use('/uploads', express.static('uploads'));
-app.post('/upload', upload.single('image'),(req,res)=>{
-    res.send('file uploaded successfully');
+app.post('/upload', upload.single('image'),(req,res,err)=>{
+    if (err) {
+        console.error('Upload error:', err);
+        // Handle the error here
+      } else {
+        // File was uploaded successfully
+        res.send('file uploaded successfully');
+      }
+    
 })
 
 app.get('/', (req, res) => {
