@@ -101,16 +101,24 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });  
 
 // app.use('/uploads', express.static('uploads'));
-app.post('/upload', upload.single('image'),(req,res,err)=>{
-    if (err) {
-        res.status(400).json({ error: 'no file uploaded' });
-        // Handle the error here
-      } else {
-        // File was uploaded successfully
-        res.status(200).json({ error: 'File uploaded successfully' });
+app.post('/upload', (req, res) => {
+    upload.single('image')(req, res, (err) => {
+      if (err instanceof multer.MulterError) {
+        // A Multer error occurred when uploading.
+        if (err.code === 'LIMIT_UNEXPECTED_FILE') {
+          return res.status(400).json({ error: 'Too many files uploaded.' });
+        }
+        return res.status(400).json({ error: err.message });
+      } else if (err) {
+        // An unknown error occurred.
+        return res.status(500).json({ error: 'An error occurred while uploading the file.' });
       }
-    
-})
+  
+      // No error occurred during the upload. The file was uploaded successfully.
+      res.status(200).json({ success: 'File uploaded successfully' });
+    });
+  });
+  
 
 app.get('/', (req, res) => {
     // Handle the GET request
