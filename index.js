@@ -103,11 +103,11 @@ const upload = multer({ storage: storage });
 // app.use('/uploads', express.static('uploads'));
 app.post('/upload', upload.single('image'),(req,res,err)=>{
     if (err) {
-        console.error('Upload error:', err);
+        res.status(400).json({ error: 'no file uploaded' });
         // Handle the error here
       } else {
         // File was uploaded successfully
-        res.send('file uploaded successfully');
+        res.status(200).json({ error: 'File uploaded successfully' });
       }
     
 })
