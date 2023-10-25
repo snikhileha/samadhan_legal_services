@@ -100,7 +100,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });  
 
-// app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 app.post('/upload', (req, res) => {
     upload.single('image')(req, res, (err) => {
       if (err instanceof multer.MulterError) {
@@ -132,7 +132,7 @@ const Client = mongoose.model('Client');
 const Lawyer = mongoose.model('Lawyer');
 const Admin = mongoose.model('Admin');
 
-
+console.log(__dirname);
 
 app.post('/signUp-client', upload.single('image'), async (req, res) => {
     // app.post('/signUp-client', async (req, res) => {
