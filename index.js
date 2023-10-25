@@ -91,7 +91,7 @@ mongoose.connect(`${url}`, {
 // const originalName = __dirname;
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, 'uploads')); 
+        cb(null, 'uploads'); 
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname); // Rename the file
