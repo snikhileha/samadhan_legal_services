@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const dotenv = require("dotenv");
-const mongoose = require('./mongoose');
+const mongoose = require('../mongoose');
 
 dotenv.config({ path: './config.env' });
 
 const JWT_SECRET = process.env.JWT;
 const upload = require('../multerConfig'); 
 
-require('./Models/Lawyer');
+require('../Models/Lawyer');
 const Lawyer = mongoose.model('Lawyer');
-require('./Models/Client');
+require('../Models/Client');
 const Client = mongoose.model('Client');
 
 

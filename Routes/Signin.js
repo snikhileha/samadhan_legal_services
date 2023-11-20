@@ -3,16 +3,16 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv = require("dotenv");
-dotenv.config({ path:'./config.env'});
-const mongoose = require('./mongoose');
+dotenv.config({ path:'../config.env'});
+const mongoose = require('../mongoose');
 
 const JWT_SECRET = process.env.JWT;
 
-require('./Models/Lawyer');
+require('../Models/Lawyer');
 const Lawyer = mongoose.model('Lawyer');
-require('./Models/Admin');
+require('../Models/Admin');
 const Admin = mongoose.model('Admin');
-require('./Models/Client');
+require('../Models/Client');
 const Client = mongoose.model('Client');
 
 router.post('/signIn', async (req, res) => {

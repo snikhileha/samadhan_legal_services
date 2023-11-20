@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const mongoose = require('./mongoose');
+const mongoose = require('../mongoose');
 const upload = require('../multerConfig'); 
 
-require('./Models/Admin');
+require('../Models/Admin');
 const Admin = mongoose.model('Admin');
 
 router.post('/signUp-admin', upload.single('image'), async (req, res) => {
