@@ -1,8 +1,6 @@
 // mongoose.js
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-
-dotenv.config({ path: './config.env' });
+const dotenv = require('dotenv').config();
 
 const url = process.env.DATABASE;
 

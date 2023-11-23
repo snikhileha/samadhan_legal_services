@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const dotenv = require("dotenv");
-dotenv.config({ path:'../config.env'});
+const dotenv = require('dotenv').config();
 const mongoose = require('../mongoose');
 
 const JWT_SECRET = process.env.JWT;

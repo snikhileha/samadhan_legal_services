@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
-const dotenv = require("dotenv");
-dotenv.config({ path:'./config.env'});
+const dotenv = require('dotenv').config();
+
 const URL = process.env.URL;
 const port = process.env.PORT || 5000
 
