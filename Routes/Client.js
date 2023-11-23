@@ -109,4 +109,4 @@ router.delete("/client/:clientId", async (req, res) => {
     }
 });
 
-module.exports = clientRouter;
+module.exports = router;

@@ -23,17 +23,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
 
-const adminRoute = require('./Routes/Admin');
-const clientRoute = require('./Routes/Client');
-const lawyerRoute = require('./Routes/Lawyer');
-const profileRoute = require('./Routes/Profile');
-const signInRoute = require('./Routes/Signin');
+const indexRoute = require('./Routes');
+// const clientRoute = require('./Routes/Client');
+// const lawyerRoute = require('./Routes/Lawyer');
+// const profileRoute = require('./Routes/Profile');
+// const signInRoute = require('./Routes/Signin');
 
-app.use('/adminRoute',adminRoute);
-app.use('/clientRoute',clientRoute);
-app.use('/lawyerRoute',lawyerRoute);
-app.use('/profileRoute',profileRoute);
-app.use('/signInRoute',signInRoute);
+app.use(indexRoute);
+// app.use('/clientRoute',clientRoute);
+// app.use('/lawyerRoute',lawyerRoute);
+// app.use('/profileRoute',profileRoute);
+// app.use('/signInRoute',signInRoute);
 
 
 app.get('/', (req, res) => {

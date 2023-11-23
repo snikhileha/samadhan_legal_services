@@ -114,4 +114,4 @@ router.delete("/admin/:adminId", async (req, res) => {
     }
 });
 
-module.exports = adminRouter;
+module.exports = router;

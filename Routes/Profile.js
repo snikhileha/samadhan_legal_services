@@ -72,4 +72,4 @@ router.post('/lawyerProfile', async (req, res) => {
     }
 })
 
-module.exports = profileRouter;
+module.exports = router;

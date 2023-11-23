@@ -112,4 +112,4 @@ router.delete("/lawyer/:lawyerId", async (req, res) => {
     }
 });
 
-module.exports = lawyerRouter;
+module.exports = router;

@@ -66,4 +66,4 @@ router.post('/signIn', async (req, res) => {
     return res.json({ status: "error", error: "Invalid Password" });
 })
 
-module.exports = signInRouter;
+module.exports = router;
