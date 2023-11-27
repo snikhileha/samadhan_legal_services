@@ -17,7 +17,7 @@ const CorsOptions = {
 //     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 //     next();
 // });
-
+app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 app.use(cors(CorsOptions));
 app.post('/upload', upload.single('file'), (req, res) => {
@@ -28,6 +28,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
+
+
 
 const adminRoute = require('./Routes/Admin');
 const clientRoute = require('./Routes/Client');
