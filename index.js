@@ -25,7 +25,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
     res.send('File uploaded successfully!');
   });
   
-// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
 // app.use('/uploads', express.static('uploads'));
 // app.use( express.static('uploads'));
