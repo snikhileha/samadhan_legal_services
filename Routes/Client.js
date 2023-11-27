@@ -9,6 +9,7 @@ const Client = mongoose.model('Client');
 
 router.post('/signUp-client', upload.single('image'), async (req, res) => {
     const { name, email, password, user } = req.body;
+    console.log(req.file);
     const encryptedPassword = await bcrypt.hash(password, 10);
     try {
         if (!req.file) {
