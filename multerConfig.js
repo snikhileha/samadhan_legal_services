@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const dotenv = require('dotenv').config();
 
 const app = express();
 app.use('/uploads', express.static('uploads'));
@@ -9,7 +10,7 @@ app.use('/uploads', express.static('uploads'));
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         // cb(null, path.join(__dirname,'../uploads/')); 
-        cb(null, 'uploads'); 
+        cb(null, process.env.UPLOADS_FOLDER ||'uploads'); 
         
     },
     filename: function (req, file, cb) {
